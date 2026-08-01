@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+</head>
+<body>
+
+    <!-- Sidebar Overlay for mobile screen -->
+    {% block content %}
+        
+
+        <!-- Main Content Area Start -->
+        <div class="main-content">
+            <!-- Header Start -->
+            <div class="admin-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="header-title">
+                        <h2>Products List</h2>
+                        <p>Manage product details and update stock quantity levels.</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="./add-product.html" class="btn-floating-add">
+                        <i class="bi bi-plus-lg"></i> Add New Product
+                    </a>
+                    <a href="../login.html" class="btn-logout-admin">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </div>
+            </div>
+            <!-- Header End -->
+
+            <!-- Products Inventory Card Start -->
+            <div class="products-card">
+                <div class="table-responsive-custom">
+                    <table class="table table-custom align-middle">
+                        <thead>
+                            <tr>
+                                <th class="product-img-th">Image</th>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Quantity (Stock)</th>
+                                <th>Status</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Product 1 -->
+                            <tr id="prod-row-1">
+                                <td>
+                                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop" class="product-thumb" alt="Cake">
+                                </td>
+                                <td class="product-name-column">Chocolate Fantasy</td>
+                                <td><span class="product-category-badge">Chocolate Cakes</span></td>
+                                <td class="fw-bold">₹799</td>
+                                <td>
+                                    <div class="quantity-control-container">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(1, -1)">-</button>
+                                        <input type="number" class="input-qty-value" id="qty-input-1" value="15" onchange="manualAdjustQty(1)">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(1, 1)">+</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="stock-badge stock-in" id="status-1">In Stock</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn-update-stock" onclick="saveQty(1)">
+                                            <i class="bi bi-check2"></i> Save
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Product 2 -->
+                            <tr id="prod-row-2">
+                                <td>
+                                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800&auto=format&fit=crop" class="product-thumb" alt="Cake">
+                                </td>
+                                <td class="product-name-column">Strawberry Delight</td>
+                                <td><span class="product-category-badge">Fruit Cakes</span></td>
+                                <td class="fw-bold">₹699</td>
+                                <td>
+                                    <div class="quantity-control-container">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(2, -1)">-</button>
+                                        <input type="number" class="input-qty-value" id="qty-input-2" value="8" onchange="manualAdjustQty(2)">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(2, 1)">+</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="stock-badge stock-in" id="status-2">In Stock</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn-update-stock" onclick="saveQty(2)">
+                                            <i class="bi bi-check2"></i> Save
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Product 3 -->
+                            <tr id="prod-row-3">
+                                <td>
+                                    <img src="https://images.unsplash.com/photo-1559622214-f8a9850965bb?q=80&w=800&auto=format&fit=crop" class="product-thumb" alt="Cake">
+                                </td>
+                                <td class="product-name-column">Red Velvet Cake</td>
+                                <td><span class="product-category-badge">Wedding Cakes</span></td>
+                                <td class="fw-bold">₹899</td>
+                                <td>
+                                    <div class="quantity-control-container">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(3, -1)">-</button>
+                                        <input type="number" class="input-qty-value" id="qty-input-3" value="3" onchange="manualAdjustQty(3)">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(3, 1)">+</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="stock-badge stock-low" id="status-3">Low Stock</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn-update-stock" onclick="saveQty(3)">
+                                            <i class="bi bi-check2"></i> Save
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Product 4 -->
+                            <tr id="prod-row-4">
+                                <td>
+                                    <img src="https://images.unsplash.com/photo-1464306076886-da185f6a9d05?q=80&w=800&auto=format&fit=crop" class="product-thumb" alt="Cake">
+                                </td>
+                                <td class="product-name-column">Fresh Fruit Cake</td>
+                                <td><span class="product-category-badge">Fruit Cakes</span></td>
+                                <td class="fw-bold">₹749</td>
+                                <td>
+                                    <div class="quantity-control-container">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(4, -1)">-</button>
+                                        <input type="number" class="input-qty-value" id="qty-input-4" value="10" onchange="manualAdjustQty(4)">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(4, 1)">+</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="stock-badge stock-in" id="status-4">In Stock</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn-update-stock" onclick="saveQty(4)">
+                                            <i class="bi bi-check2"></i> Save
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Product 5 -->
+                            <tr id="prod-row-5">
+                                <td>
+                                    <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?q=80&w=800&auto=format&fit=crop" class="product-thumb" alt="Cake">
+                                </td>
+                                <td class="product-name-column">Birthday Special</td>
+                                <td><span class="product-category-badge">Birthday Cakes</span></td>
+                                <td class="fw-bold">₹999</td>
+                                <td>
+                                    <div class="quantity-control-container">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(5, -1)">-</button>
+                                        <input type="number" class="input-qty-value" id="qty-input-5" value="0" onchange="manualAdjustQty(5)">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(5, 1)">+</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="stock-badge stock-out" id="status-5">Out of Stock</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn-update-stock" onclick="saveQty(5)">
+                                            <i class="bi bi-check2"></i> Save
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Product 6 -->
+                            <tr id="prod-row-6">
+                                <td>
+                                    <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=800&auto=format&fit=crop" class="product-thumb" alt="Cake">
+                                </td>
+                                <td class="product-name-column">Sweet Cup Cakes</td>
+                                <td><span class="product-category-badge">Cup Cakes</span></td>
+                                <td class="fw-bold">₹399</td>
+                                <td>
+                                    <div class="quantity-control-container">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(6, -1)">-</button>
+                                        <input type="number" class="input-qty-value" id="qty-input-6" value="25" onchange="manualAdjustQty(6)">
+                                        <button class="btn-qty-adjust" onclick="adjustQty(6, 1)">+</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="stock-badge stock-in" id="status-6">In Stock</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn-update-stock" onclick="saveQty(6)">
+                                            <i class="bi bi-check2"></i> Save
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Products Inventory Card End -->
+        </div>
+        <!-- Main Content Area End -->
+    {% endblock %}
+
+    <!-- Notification Toast -->
+    <div class="admin-toast" id="toastMessage">
+        <i class="bi bi-check-circle-fill"></i>
+        <span id="toastText">Stock level updated successfully!</span>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Page Logic -->
+    <script>
+        // Hamburger Menu Toggle for Mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const adminSidebar = document.getElementById('adminSidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        if(menuToggle && adminSidebar && sidebarOverlay) {
+            menuToggle.addEventListener('click', () => {
+                adminSidebar.classList.toggle('active');
+                sidebarOverlay.classList.toggle('active');
+            });
+
+            sidebarOverlay.addEventListener('click', () => {
+                adminSidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+        }
+
+        // Adjust Quantity Logic
+        function adjustQty(id, change) {
+            const input = document.getElementById(`qty-input-${id}`);
+            if (input) {
+                let currentVal = parseInt(input.value) || 0;
+                let newVal = currentVal + change;
+                if (newVal < 0) newVal = 0;
+                input.value = newVal;
+                
+                updateStatusBadge(id, newVal);
+            }
+        }
+
+        function manualAdjustQty(id) {
+            const input = document.getElementById(`qty-input-${id}`);
+            if (input) {
+                let currentVal = parseInt(input.value) || 0;
+                if (currentVal < 0) {
+                    currentVal = 0;
+                    input.value = 0;
+                }
+                updateStatusBadge(id, currentVal);
+            }
+        }
+
+        // Dynamically update status badge color and text based on inventory
+        function updateStatusBadge(id, qty) {
+            const badge = document.getElementById(`status-${id}`);
+            if (badge) {
+                badge.className = 'stock-badge'; // reset
+                if (qty === 0) {
+                    badge.classList.add('stock-out');
+                    badge.textContent = 'Out of Stock';
+                } else if (qty <= 5) {
+                    badge.classList.add('stock-low');
+                    badge.textContent = 'Low Stock';
+                } else {
+                    badge.classList.add('stock-in');
+                    badge.textContent = 'In Stock';
+                }
+            }
+        }
+
+        // Save stock notification
+        function saveQty(id) {
+            const input = document.getElementById(`qty-input-${id}`);
+            const qty = input ? input.value : 0;
+            showToast(`Product stock set to ${qty} items successfully!`);
+        }
+
+        // Custom Toast Notification trigger
+        function showToast(message) {
+            const toast = document.getElementById('toastMessage');
+            const toastText = document.getElementById('toastText');
+            if (toast && toastText) {
+                toastText.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>

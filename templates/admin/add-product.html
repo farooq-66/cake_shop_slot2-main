@@ -1,0 +1,439 @@
+{% extends 'admin/admin-base.html' %}
+
+
+    {% block style %}
+    <link rel="stylesheet" href="{% static 'css/admin/add-products.css' %}">
+    
+    {% endblock %}
+    <!-- Sidebar Overlay for mobile screen -->
+        
+        {% block content %}
+        <!-- Main Content Area Start -->
+        <div class="main-content">
+            <!-- Header Start -->
+            <div class="admin-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="header-title">
+                        <h2>Add Product</h2>
+                        <p>Create new cakes or quick-update the inventory levels of existing products.</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="./products.html" class="btn-visit-site">
+                        <i class="bi bi-arrow-left"></i> Back to Products
+                    </a>
+                    <a href="../login.html" class="btn-logout-admin">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </div>
+            </div>
+            <!-- Header End -->
+
+            <div class="row">
+                <!-- Left Form: Add New Product -->
+                <div class="col-lg-8">
+                    <div class="form-card">
+                        <div class="form-header-title-container mb-4 pb-2 border-bottom border-light">
+                            <h4 class="text-dark fw-bold mb-1">New Cake Specification</h4>
+                            <p class="text-muted small">Specify cake details, size variants, pricing structure, and display imagery.</p>
+                        </div>
+                        <form id="addProductForm">
+                            <div class="row">
+                                <!-- Name -->
+                                <div class="col-12 form-group-custom">
+                                    <label for="productName">
+                                        <i class="bi bi-bookmark-star-fill text-primary me-2"></i>Product Name
+                                    </label>
+                                    <input type="text" class="form-input-custom" id="productName" placeholder="e.g. Vanilla Truffle Cake" required>
+                                </div>
+
+                                <!-- Category & Rate -->
+                                <div class="col-md-6 form-group-custom">
+                                    <label for="productCategory">
+                                        <i class="bi bi-tags-fill text-primary me-2"></i>Category
+                                    </label>
+                                    <select class="form-input-custom form-select" id="productCategory" required>
+                                        <option value="" disabled selected>Select Category</option>
+                                        <option value="Chocolate Cakes">Chocolate Cakes</option>
+                                        <option value="Birthday Cakes">Birthday Cakes</option>
+                                        <option value="Wedding Cakes">Wedding Cakes</option>
+                                        <option value="Cup Cakes">Cup Cakes</option>
+                                        <option value="Fruit Cakes">Fruit Cakes</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 form-group-custom">
+                                    <label for="productPrice">
+                                        <i class="bi bi-currency-rupee text-primary me-1"></i>Rate (Price per item)
+                                    </label>
+                                    <div class="input-prefix-group">
+                                        <span class="input-prefix">₹</span>
+                                        <input type="number" class="form-input-custom" id="productPrice" placeholder="e.g. 799" min="1" required>
+                                    </div>
+                                </div>
+
+                                <!-- Stock Qty -->
+                                <div class="col-12 form-group-custom">
+                                    <label for="productQty">
+                                        <i class="bi bi-layers-fill text-primary me-2"></i>Initial Quantity (Stock)
+                                    </label>
+                                    <input type="number" class="form-input-custom" id="productQty" placeholder="e.g. 10" min="0" required>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="col-12 form-group-custom">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <label for="productDesc" class="mb-0">
+                                            <i class="bi bi-file-text-fill text-primary me-2"></i>Description
+                                        </label>
+                                        <span class="text-muted small" id="descCharCount" style="font-size: 11px; font-weight: 500;">0 / 200 chars</span>
+                                    </div>
+                                    <textarea class="form-input-custom textarea-custom" id="productDesc" maxlength="200" placeholder="Enter rich details about taste, ingredients, and size options..." required></textarea>
+                                </div>
+
+                                <!-- Image Upload -->
+                                <div class="col-12 form-group-custom">
+                                    <label>
+                                        <i class="bi bi-image-fill text-primary me-2"></i>Product Image
+                                    </label>
+                                    <div class="image-upload-wrapper">
+                                        <div class="image-upload-box" id="dropzone">
+                                            <div class="pulse-upload-circle">
+                                                <i class="bi bi-cloud-arrow-up-fill upload-icon"></i>
+                                            </div>
+                                            <div class="upload-text">
+                                                <h6>Drag & drop product image here</h6>
+                                                <p>or <span class="browse-link" style="color: var(--primary-color); font-weight: 600;">browse files</span></p>
+                                                <span class="file-spec-tag">Supports JPG, PNG, WEBP (Max 2MB)</span>
+                                            </div>
+                                            <input type="file" id="productImage" accept="image/*" required>
+                                        </div>
+                                        <div class="image-preview-container" id="previewContainer">
+                                            <div class="preview-overlay">
+                                                <button type="button" class="btn-remove-preview" id="removePreviewBtn" title="Remove image">
+                                                    <i class="bi bi-trash3-fill"></i>
+                                                </button>
+                                            </div>
+                                            <img id="imagePreview" src="" alt="Product Preview">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions-footer">
+                                <button type="reset" class="btn-form-reset" id="resetFormBtn">Clear All</button>
+                                <button type="submit" class="btn-form-submit">Publish Product</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Form: Quick Stock Update -->
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="form-card quick-stock-card">
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <div class="icon-circle bg-light-primary text-primary d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; border-radius: 50%; background: rgba(255, 77, 109, 0.1);">
+                                <i class="bi bi-lightning-charge-fill" style="font-size: 18px;"></i>
+                            </div>
+                            <h4 class="mb-0 text-dark fw-bold">Quick Stock Update</h4>
+                        </div>
+                        <p class="text-muted small mb-4">Adjust inventory numbers directly without visiting the catalog.</p>
+                        
+                        <!-- Search Cake -->
+                        <div class="table-search mb-4">
+                            <input type="text" id="quickSearchInput" placeholder="Search product name...">
+                            <i class="bi bi-search"></i>
+                        </div>
+
+                        <!-- Quick List items -->
+                        <div id="quickProductsList" class="custom-scrollbar" style="max-height: 400px; overflow-y: auto; padding-right: 5px;">
+                            <!-- Product 1 -->
+                            <div class="product-search-item" data-name="chocolate fantasy">
+                                <div class="prod-details">
+                                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop" class="prod-thumb" alt="Cake">
+                                    <div class="prod-info">
+                                        <h6>Chocolate Fantasy</h6>
+                                        <div class="stock-badge-wrapper mt-1">
+                                            <span class="stock-status-badge badge-in-stock" id="badge-stock-val-1">In Stock</span>
+                                            <span class="small text-muted ms-2">Stock: <span id="quick-stock-val-1" class="fw-semibold text-dark">15</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="quantity-control-container justify-content-end" style="max-width: 110px; display: flex; gap: 6px;">
+                                    <button type="button" class="btn-qty-adjust btn-qty-minus" onclick="quickQtyAdjust(1, -1)">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn-qty-adjust btn-qty-plus" onclick="quickQtyAdjust(1, 1)">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Product 2 -->
+                            <div class="product-search-item" data-name="strawberry delight">
+                                <div class="prod-details">
+                                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800&auto=format&fit=crop" class="prod-thumb" alt="Cake">
+                                    <div class="prod-info">
+                                        <h6>Strawberry Delight</h6>
+                                        <div class="stock-badge-wrapper mt-1">
+                                            <span class="stock-status-badge badge-in-stock" id="badge-stock-val-2">In Stock</span>
+                                            <span class="small text-muted ms-2">Stock: <span id="quick-stock-val-2" class="fw-semibold text-dark">8</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="quantity-control-container justify-content-end" style="max-width: 110px; display: flex; gap: 6px;">
+                                    <button type="button" class="btn-qty-adjust btn-qty-minus" onclick="quickQtyAdjust(2, -1)">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn-qty-adjust btn-qty-plus" onclick="quickQtyAdjust(2, 1)">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Product 3 -->
+                            <div class="product-search-item" data-name="red velvet cake">
+                                <div class="prod-details">
+                                    <img src="https://images.unsplash.com/photo-1559622214-f8a9850965bb?q=80&w=800&auto=format&fit=crop" class="prod-thumb" alt="Cake">
+                                    <div class="prod-info">
+                                        <h6>Red Velvet Cake</h6>
+                                        <div class="stock-badge-wrapper mt-1">
+                                            <span class="stock-status-badge badge-low-stock" id="badge-stock-val-3">Low Stock</span>
+                                            <span class="small text-muted ms-2">Stock: <span id="quick-stock-val-3" class="fw-semibold text-dark">3</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="quantity-control-container justify-content-end" style="max-width: 110px; display: flex; gap: 6px;">
+                                    <button type="button" class="btn-qty-adjust btn-qty-minus" onclick="quickQtyAdjust(3, -1)">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn-qty-adjust btn-qty-plus" onclick="quickQtyAdjust(3, 1)">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Product 4 -->
+                            <div class="product-search-item" data-name="fresh fruit cake">
+                                <div class="prod-details">
+                                    <img src="https://images.unsplash.com/photo-1464306076886-da185f6a9d05?q=80&w=800&auto=format&fit=crop" class="prod-thumb" alt="Cake">
+                                    <div class="prod-info">
+                                        <h6>Fresh Fruit Cake</h6>
+                                        <div class="stock-badge-wrapper mt-1">
+                                            <span class="stock-status-badge badge-in-stock" id="badge-stock-val-4">In Stock</span>
+                                            <span class="small text-muted ms-2">Stock: <span id="quick-stock-val-4" class="fw-semibold text-dark">10</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="quantity-control-container justify-content-end" style="max-width: 110px; display: flex; gap: 6px;">
+                                    <button type="button" class="btn-qty-adjust btn-qty-minus" onclick="quickQtyAdjust(4, -1)">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn-qty-adjust btn-qty-plus" onclick="quickQtyAdjust(4, 1)">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Product 5 -->
+                            <div class="product-search-item" data-name="birthday special">
+                                <div class="prod-details">
+                                    <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?q=80&w=800&auto=format&fit=crop" class="prod-thumb" alt="Cake">
+                                    <div class="prod-info">
+                                        <h6>Birthday Special</h6>
+                                        <div class="stock-badge-wrapper mt-1">
+                                            <span class="stock-status-badge badge-out-of-stock" id="badge-stock-val-5">Out of Stock</span>
+                                            <span class="small text-muted ms-2">Stock: <span id="quick-stock-val-5" class="fw-semibold text-dark">0</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="quantity-control-container justify-content-end" style="max-width: 110px; display: flex; gap: 6px;">
+                                    <button type="button" class="btn-qty-adjust btn-qty-minus" onclick="quickQtyAdjust(5, -1)">
+                                        <i class="bi bi-dash-lg"></i>
+                                    </button>
+                                    <button type="button" class="btn-qty-adjust btn-qty-plus" onclick="quickQtyAdjust(5, 1)">
+                                        <i class="bi bi-plus-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content Area End -->
+    {% endblock %}
+
+    {% block endcomponents %}
+    <!-- Notification Toast -->
+    <div class="admin-toast" id="toastMessage">
+        <i class="bi bi-check-circle-fill"></i>
+        <span id="toastText">Product created successfully!</span>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Page Logic -->
+    <script>
+        // Hamburger Menu Toggle for Mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const adminSidebar = document.getElementById('adminSidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        if(menuToggle && adminSidebar && sidebarOverlay) {
+            menuToggle.addEventListener('click', () => {
+                adminSidebar.classList.toggle('active');
+                sidebarOverlay.classList.toggle('active');
+            });
+
+            sidebarOverlay.addEventListener('click', () => {
+                adminSidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+        }
+
+        // Image Preview Handler
+        const productImage = document.getElementById('productImage');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewContainer = document.getElementById('previewContainer');
+        const dropzone = document.getElementById('dropzone');
+        const removePreviewBtn = document.getElementById('removePreviewBtn');
+
+        productImage.addEventListener('change', () => {
+            const file = productImage.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    dropzone.style.display = 'none';
+                    previewContainer.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        removePreviewBtn.addEventListener('click', () => {
+            productImage.value = '';
+            imagePreview.src = '';
+            dropzone.style.display = 'flex';
+            previewContainer.style.display = 'none';
+        });
+
+        // Form Reset UI updates
+        function clearImagePreview() {
+            productImage.value = '';
+            imagePreview.src = '';
+            dropzone.style.display = 'flex';
+            previewContainer.style.display = 'none';
+            if (descCharCount) descCharCount.textContent = '0 / 200 chars';
+        }
+
+        // Form Submit Handler
+        const addProductForm = document.getElementById('addProductForm');
+        addProductForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('productName').value;
+            showToast(`Product "${name}" has been published!`);
+            
+            // Reset fields & preview
+            addProductForm.reset();
+            clearImagePreview();
+        });
+
+        // Reset click trigger handles clearing image uploader view
+        document.getElementById('resetFormBtn').addEventListener('click', () => {
+            setTimeout(clearImagePreview, 50); // Small timeout to let reset form trigger first
+        });
+
+        // Description Character Counter
+        const productDesc = document.getElementById('productDesc');
+        const descCharCount = document.getElementById('descCharCount');
+        if (productDesc && descCharCount) {
+            productDesc.addEventListener('input', () => {
+                const count = productDesc.value.length;
+                descCharCount.textContent = `${count} / 200 chars`;
+            });
+        }
+
+        // Dynamic Stock Badge Update
+        function updateStockBadge(id, stockVal) {
+            const badge = document.getElementById(`badge-stock-val-${id}`);
+            if (badge) {
+                badge.className = 'stock-status-badge';
+                if (stockVal === 0) {
+                    badge.classList.add('badge-out-of-stock');
+                    badge.textContent = 'Out of Stock';
+                } else if (stockVal >= 1 && stockVal <= 5) {
+                    badge.classList.add('badge-low-stock');
+                    badge.textContent = 'Low Stock';
+                } else {
+                    badge.classList.add('badge-in-stock');
+                    badge.textContent = 'In Stock';
+                }
+            }
+        }
+
+        // Quick Stock adjust handles
+        function quickQtyAdjust(id, change) {
+            const label = document.getElementById(`quick-stock-val-${id}`);
+            if (label) {
+                let currentVal = parseInt(label.textContent) || 0;
+                let newVal = currentVal + change;
+                if (newVal < 0) newVal = 0;
+                label.textContent = newVal;
+                
+                // Update badge colors & text dynamically
+                updateStockBadge(id, newVal);
+                
+                showToast(`Inventory updated to ${newVal} units!`);
+            }
+        }
+
+        // Quick search filter for products
+        const quickSearchInput = document.getElementById('quickSearchInput');
+        const quickItems = document.querySelectorAll('.product-search-item');
+
+        quickSearchInput.addEventListener('input', () => {
+            const query = quickSearchInput.value.toLowerCase().trim();
+
+            quickItems.forEach(item => {
+                const name = item.getAttribute('data-name');
+                if (name.includes(query)) {
+                    item.style.setProperty('display', 'flex', 'important');
+                } else {
+                    item.style.setProperty('display', 'none', 'important');
+                }
+            });
+        });
+
+        // Custom Toast Notification trigger
+        function showToast(message) {
+            const toast = document.getElementById('toastMessage');
+            const toastText = document.getElementById('toastText');
+            if (toast && toastText) {
+                toastText.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Initialize all stock badges on load
+        window.addEventListener('DOMContentLoaded', () => {
+            for (let id = 1; id <= 5; id++) {
+                const label = document.getElementById(`quick-stock-val-${id}`);
+                if (label) {
+                    const currentVal = parseInt(label.textContent) || 0;
+                    updateStockBadge(id, currentVal);
+                }
+            }
+        });
+    </script>
+    {% endblock %}
+

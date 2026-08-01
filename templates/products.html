@@ -1,0 +1,180 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SweetCake Products</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand logo-text" href="#">
+                Sweet<span>Cake</span>
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <i class="bi bi-list fs-1"></i>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+
+                <ul class="navbar-nav align-items-lg-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="./home.html">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gallery</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a href="#" class="profile-icon">
+                            <i class="bi bi-person-fill"></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a href="../login.html"><button class="login-btn" >
+                            Logout
+                        </button></a>
+                    </li>
+
+                    <!-- Cart Icon -->
+                <li class="nav-item ms-lg-3">
+                    <a href="{% url 'view-cart' %}" class="cart-icon">
+                        <i class="bi bi-cart3"></i>
+                        <span class="cart-badge">
+                            100
+                        </span>
+                    </a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Products Section -->
+    <section class="products-page">
+        <div class="container">
+            <!-- Heading -->
+            <div class="text-center">
+                <p class="section-subtitle">
+                    OUR DELICIOUS COLLECTION
+                </p>
+                <h2 class="section-title">
+                    Explore Our Premium Cakes
+                </h2>
+                <p class="section-description">
+                    Discover freshly baked cakes crafted with love,
+                    premium ingredients, and beautiful designs perfect
+                    for every celebration.
+                </p>
+            </div>
+            <!-- Search & Filter -->
+            <div class="search-filter-box">
+                <div class="row g-3">
+                    <!-- Search -->
+                    <div class="col-lg-8">
+                        <div class="search-box">
+                            <i class="bi bi-search"></i>
+                            <input type="text"
+                                placeholder="Search your favorite cake...">
+                        </div>
+                    </div>
+
+                    <!-- Filter -->
+                    <div class="col-lg-4">
+                        <select class="form-select filter-select">
+                            <option selected>
+                                Filter By Category
+                            </option>
+                            <option>
+                                Chocolate Cakes
+                            </option>
+                            <option>
+                                Birthday Cakes
+                            </option>
+                            <option>
+                                Wedding Cakes
+                            </option>
+                            <option>
+                                Cup Cakes
+                            </option>
+                            <option>
+                                Fruit Cakes
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Cards -->
+            <div class="row g-4 mt-5">
+                <!-- Product 1 -->
+                 {% for i in cakes %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="{{ i.cake_image.url }}"
+                                alt="Chocolate Cake">
+                        </div>
+
+                        <div class="product-content">
+                            <h3>{{ i.cake_name }}</h3>
+                            <p>
+                                {{i.cake_description}}
+                            </p>
+                            <div class="product-bottom">
+                                <h4>₹{{i.cake_price}}</h4>
+                                <a href="{% url 'add-to-cart' i.id %}" class="btn-add-cart cart-btn">
+                                    <i class="bi bi-cart-plus">
+                                        
+                                    </i> Add to Cart
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

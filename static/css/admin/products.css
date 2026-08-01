@@ -1,0 +1,153 @@
+/* Admin Products view styles */
+
+.products-card {
+    background: var(--white);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    padding: 24px;
+}
+
+.product-img-th {
+    width: 60px;
+    text-align: center;
+}
+
+.product-thumb {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+}
+
+.product-name-column {
+    font-weight: 700;
+    color: var(--dark-bg);
+}
+
+.product-category-badge {
+    background: var(--light-bg);
+    color: var(--text-dark);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+}
+
+/* Quantity Control Box */
+.quantity-control-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 140px;
+}
+
+.btn-qty-adjust {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--light-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.btn-qty-adjust:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.input-qty-value {
+    width: 50px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark-bg);
+    outline: none;
+}
+
+.input-qty-value::-webkit-inner-spin-button,
+.input-qty-value::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Stock Status Badges */
+.stock-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.stock-in {
+    background: rgba(46, 196, 182, 0.1);
+    color: #2ec4b6;
+}
+
+.stock-low {
+    background: rgba(255, 159, 67, 0.1);
+    color: #ff9f43;
+}
+
+.stock-out {
+    background: rgba(230, 57, 86, 0.1);
+    color: #e63956;
+}
+
+/* Save / Update Button */
+.btn-update-stock {
+    background: var(--white);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-update-stock:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.15);
+}
+
+/* Add product quick floating button */
+.btn-floating-add {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+    transition: all var(--transition-speed);
+}
+
+.btn-floating-add:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.3);
+    color: var(--white);
+}

@@ -1,0 +1,467 @@
+/* Admin Add Product Form Styles */
+
+.form-card {
+    background: var(--white);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    padding: 30px;
+}
+
+.form-header-title-container {
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Form Groups and Inputs */
+.form-group-custom {
+    margin-bottom: 22px;
+}
+
+.form-group-custom label {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark-bg);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.form-input-custom {
+    width: 100%;
+    padding: 13px 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    outline: none;
+    font-size: 14px;
+    background: var(--light-bg);
+    color: var(--text-dark);
+    font-family: inherit;
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-input-custom:focus {
+    border-color: var(--primary-color);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.12);
+}
+
+.form-input-custom::placeholder {
+    color: var(--text-muted);
+    opacity: 0.65;
+}
+
+/* Custom Select Dropdown Arrow */
+select.form-input-custom {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ff4d6d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    background-size: 14px;
+    padding-right: 45px;
+}
+
+/* Input Prefix Customization */
+.input-prefix-group {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.input-prefix {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: var(--primary-color);
+    pointer-events: none;
+    font-size: 16px;
+}
+
+.input-prefix-group .form-input-custom {
+    padding-left: 36px;
+}
+
+.textarea-custom {
+    resize: none;
+    min-height: 120px;
+    line-height: 1.5;
+}
+
+/* Image Upload Container Styling */
+.image-upload-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.image-upload-box {
+    border: 2px dashed #ffb3c1;
+    background: linear-gradient(135deg, #fffcfb 0%, #fff8f5 100%);
+    border-radius: 16px;
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.image-upload-box:hover {
+    border-color: var(--primary-color);
+    background: rgba(255, 77, 109, 0.03);
+    box-shadow: 0 4px 20px rgba(255, 77, 109, 0.05);
+}
+
+.image-upload-box input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.pulse-upload-circle {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: rgba(255, 77, 109, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-speed) ease;
+}
+
+.image-upload-box:hover .pulse-upload-circle {
+    transform: scale(1.1);
+    background: rgba(255, 77, 109, 0.15);
+}
+
+.upload-icon {
+    font-size: 32px;
+    color: var(--primary-color);
+}
+
+.upload-text h6 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark-bg);
+}
+
+.upload-text p {
+    margin: 0 0 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.file-spec-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: rgba(45, 30, 30, 0.05);
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* Image Preview Styles */
+.image-preview-container {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    display: none;
+    position: relative;
+    height: 260px;
+    box-shadow: var(--card-shadow);
+    animation: zoomIn 0.3s ease-out;
+}
+
+.image-preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(45, 30, 30, 0.35);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.image-preview-container:hover .preview-overlay {
+    opacity: 1;
+}
+
+.btn-remove-preview {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--white);
+    color: #e63956;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(10px);
+    transition: all var(--transition-speed) ease;
+}
+
+.image-preview-container:hover .btn-remove-preview {
+    transform: translateY(0);
+}
+
+.btn-remove-preview:hover {
+    background: #e63956;
+    color: var(--white);
+    transform: scale(1.08);
+}
+
+/* Action Form Footer Buttons */
+.form-actions-footer {
+    margin-top: 35px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn-form-reset {
+    background: var(--light-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-dark);
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-form-reset:hover {
+    background: #eedbd5;
+    border-color: #eedbd5;
+    color: var(--dark-bg);
+}
+
+.btn-form-submit {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ff708b 100%);
+    border: none;
+    color: var(--white);
+    padding: 12px 36px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.25);
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 77, 109, 0.35);
+}
+
+.btn-form-submit:active {
+    transform: translateY(0);
+}
+
+/* Secondary Container: Quick Stock Update section */
+.quick-stock-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #ffccd5;
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+.product-search-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 12px;
+    background: var(--white);
+    transition: all var(--transition-speed) ease;
+}
+
+.product-search-item:hover {
+    border-color: #ffccd5;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.05);
+    transform: translateX(3px);
+}
+
+.prod-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.prod-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+}
+
+.prod-info h6 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark-bg);
+}
+
+/* Stock Badges styling */
+.stock-badge-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.stock-status-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-in-stock {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.badge-low-stock {
+    background: rgba(255, 193, 7, 0.12);
+    color: #f1a80a;
+}
+
+.badge-out-of-stock {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+/* Quantity Control Buttons */
+.btn-qty-adjust {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--light-bg);
+    color: var(--dark-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-qty-minus:hover {
+    background: rgba(220, 53, 69, 0.08);
+    border-color: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+}
+
+.btn-qty-plus:hover {
+    background: rgba(40, 167, 69, 0.08);
+    border-color: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+}
+
+.btn-qty-adjust:active {
+    transform: scale(0.9);
+}
+
+/* Animations */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Quick Search Bar Styling */
+.table-search {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.table-search i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 15px;
+    transition: color var(--transition-speed) ease;
+}
+
+.table-search input {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--light-bg);
+    outline: none;
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+}
+
+.table-search input:focus {
+    border-color: var(--primary-color);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.12);
+}
+
+.table-search input:focus ~ i {
+    color: var(--primary-color);
+}
+
+.table-search input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.65;
+}

@@ -1,0 +1,364 @@
+{% extends 'admin/admin-base.html' %}
+
+{% load static %}
+
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'css/admin/dashboard.css' %}">
+        <title>SweetCake Admin - Dashboard</title>
+    {% endblock %}
+
+    <!-- Sidebar Overlay for mobile screen -->
+    
+       
+        {% block content %}
+        <!-- Main Content Area Start -->
+        <div class="main-content">
+            <!-- Header Start -->
+            <div class="admin-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="header-title">
+                        <h2>Dashboard</h2>
+                        <p>Welcome back, Admin! Here is your business overview.</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="../index.html" class="btn-visit-site">
+                        <i class="bi bi-globe"></i> Visit Site
+                    </a>
+                    <a href="../login.html" class="btn-logout-admin">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </div>
+            </div>
+            <!-- Header End -->
+
+            <!-- Analytical Grid Start -->
+            <div class="stats-grid">
+                <!-- Card 1 -->
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <p>Total Revenue</p>
+                        <h3>₹45,230</h3>
+                        <div class="stat-trend trend-up">
+                            <i class="bi bi-arrow-up-short"></i> +12.5% this month
+                        </div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-currency-rupee"></i>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <p>Total Customers</p>
+                        <h3>1,245</h3>
+                        <div class="stat-trend trend-up">
+                            <i class="bi bi-arrow-up-short"></i> +8.2% this week
+                        </div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <p>Total Products</p>
+                        <h3>48 Items</h3>
+                        <div class="stat-trend text-secondary">
+                            <i class="bi bi-dash"></i> Consistent inventory
+                        </div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-cake2-fill"></i>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <p>Pending Orders</p>
+                        <h3>18 Orders</h3>
+                        <div class="stat-trend trend-down">
+                            <i class="bi bi-arrow-down-short"></i> -3.1% from yesterday
+                        </div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="bi bi-clock-history"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- Analytical Grid End -->
+
+            <!-- Dashboard Grid Layout Start -->
+            <div class="dashboard-grid">
+                <!-- Left Chart -->
+                <div class="dashboard-card">
+                    <div class="card-header-custom">
+                        <h5>Monthly Sales Overview (2026)</h5>
+                        <select class="form-select form-select-sm" style="width: auto;">
+                            <option>This Year</option>
+                            <option>Last Year</option>
+                        </select>
+                    </div>
+                    
+                    <!-- CSS Grid Chart -->
+                    <div class="chart-container">
+                        <div class="chart-axis-y">
+                            <span>₹10k</span>
+                            <span>₹7.5k</span>
+                            <span>₹5k</span>
+                            <span>₹2.5k</span>
+                            <span>₹0</span>
+                        </div>
+                        
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 45%;">
+                                <span class="chart-tooltip">₹4,500</span>
+                            </div>
+                            <span class="chart-label">Jan</span>
+                        </div>
+                        
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 60%;">
+                                <span class="chart-tooltip">₹6,000</span>
+                            </div>
+                            <span class="chart-label">Feb</span>
+                        </div>
+
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 85%;">
+                                <span class="chart-tooltip">₹8,500</span>
+                            </div>
+                            <span class="chart-label">Mar</span>
+                        </div>
+
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 70%;">
+                                <span class="chart-tooltip">₹7,000</span>
+                            </div>
+                            <span class="chart-label">Apr</span>
+                        </div>
+
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 90%;">
+                                <span class="chart-tooltip">₹9,200</span>
+                            </div>
+                            <span class="chart-label">May</span>
+                        </div>
+
+                        <div class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 75%;">
+                                <span class="chart-tooltip">₹7,500</span>
+                            </div>
+                            <span class="chart-label">Jun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Popular Products -->
+                <div class="dashboard-card">
+                    <div class="card-header-custom">
+                        <h5>Popular Products</h5>
+                        <a href="./products.html" class="text-decoration-none text-danger fw-bold fs-6">View All</a>
+                    </div>
+                    
+                    <div class="popular-products-list">
+                        <div class="pop-product-item">
+                            <div class="pop-product-detail">
+                                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop" class="pop-product-img" alt="Cake">
+                                <div class="pop-product-info">
+                                    <h6>Chocolate Fantasy</h6>
+                                    <span>Chocolate Premium</span>
+                                </div>
+                            </div>
+                            <div class="pop-product-sales">
+                                <h6>145 Sold</h6>
+                                <span>₹1.15L Earned</span>
+                            </div>
+                        </div>
+
+                        <div class="pop-product-item">
+                            <div class="pop-product-detail">
+                                <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800&auto=format&fit=crop" class="pop-product-img" alt="Cake">
+                                <div class="pop-product-info">
+                                    <h6>Strawberry Delight</h6>
+                                    <span>Fruit Flavor</span>
+                                </div>
+                            </div>
+                            <div class="pop-product-sales">
+                                <h6>98 Sold</h6>
+                                <span>₹68.5k Earned</span>
+                            </div>
+                        </div>
+
+                        <div class="pop-product-item">
+                            <div class="pop-product-detail">
+                                <img src="https://images.unsplash.com/photo-1559622214-f8a9850965bb?q=80&w=800&auto=format&fit=crop" class="pop-product-img" alt="Cake">
+                                <div class="pop-product-info">
+                                    <h6>Red Velvet Cake</h6>
+                                    <span>Special Occasion</span>
+                                </div>
+                            </div>
+                            <div class="pop-product-sales">
+                                <h6>87 Sold</h6>
+                                <span>₹78.2k Earned</span>
+                            </div>
+                        </div>
+
+                        <div class="pop-product-item">
+                            <div class="pop-product-detail">
+                                <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?q=80&w=800&auto=format&fit=crop" class="pop-product-img" alt="Cake">
+                                <div class="pop-product-info">
+                                    <h6>Birthday Special</h6>
+                                    <span>Custom Cake</span>
+                                </div>
+                            </div>
+                            <div class="pop-product-sales">
+                                <h6>76 Sold</h6>
+                                <span>₹75.9k Earned</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Dashboard Grid Layout End -->
+
+            <!-- Recent Orders Card Start -->
+            <div class="dashboard-card">
+                <div class="card-header-custom">
+                    <h5>Recent Transactions</h5>
+                </div>
+                
+                <div class="table-responsive-custom">
+                    <table class="table table-custom">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Cake Order</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold">#SC-9042</td>
+                                <td>
+                                    <div class="order-user">
+                                        <div class="order-avatar">AM</div>
+                                        <span>Adarsh Kumar</span>
+                                    </div>
+                                </td>
+                                <td>Chocolate Fantasy (1kg)</td>
+                                <td>23 May 2026</td>
+                                <td class="fw-bold">₹799</td>
+                                <td>
+                                    <span class="status-badge status-completed">Completed</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">#SC-9041</td>
+                                <td>
+                                    <div class="order-user">
+                                        <div class="order-avatar">SJ</div>
+                                        <span>Sarah Johnson</span>
+                                    </div>
+                                </td>
+                                <td>Red Velvet Cake (1.5kg)</td>
+                                <td>22 May 2026</td>
+                                <td class="fw-bold">₹1,348</td>
+                                <td>
+                                    <span class="status-badge status-pending">Pending</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">#SC-9040</td>
+                                <td>
+                                    <div class="order-user">
+                                        <div class="order-avatar">RN</div>
+                                        <span>Rahul Nair</span>
+                                    </div>
+                                </td>
+                                <td>Strawberry Delight (1kg)</td>
+                                <td>22 May 2026</td>
+                                <td class="fw-bold">₹699</td>
+                                <td>
+                                    <span class="status-badge status-completed">Completed</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">#SC-9039</td>
+                                <td>
+                                    <div class="order-user">
+                                        <div class="order-avatar">PP</div>
+                                        <span>Priya Patel</span>
+                                    </div>
+                                </td>
+                                <td>Sweet Cup Cakes (x6)</td>
+                                <td>21 May 2026</td>
+                                <td class="fw-bold">₹399</td>
+                                <td>
+                                    <span class="status-badge status-cancelled">Cancelled</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Recent Orders Card End -->
+        </div>
+        <!-- Main Content Area End -->
+    {% endblock %}
+
+    {% block endcomponents %}
+
+    <!-- Notification Toast -->
+    <div class="admin-toast" id="toastMessage">
+        <i class="bi bi-info-circle-fill"></i>
+        <span id="toastText">Welcome back, Admin!</span>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Navigation Script -->
+    <script>
+        // Hamburger Menu Toggle for Mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const adminSidebar = document.getElementById('adminSidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        if(menuToggle && adminSidebar && sidebarOverlay) {
+            menuToggle.addEventListener('click', () => {
+                adminSidebar.classList.toggle('active');
+                sidebarOverlay.classList.toggle('active');
+            });
+
+            sidebarOverlay.addEventListener('click', () => {
+                adminSidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+        }
+
+        // Dashboard Welcome Toast
+        window.addEventListener('DOMContentLoaded', () => {
+            const toast = document.getElementById('toastMessage');
+            if (toast) {
+                setTimeout(() => {
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                }, 800);
+            }
+        });
+    </script>
+    {% endblock %}
+

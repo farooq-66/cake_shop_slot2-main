@@ -1,0 +1,261 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SweetCake - Shopping Cart</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand logo-text" href="">
+                Sweet<span>Cake</span>
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <i class="bi bi-list fs-1"></i>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+
+                <ul class="navbar-nav align-items-lg-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gallery</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'view-products' %}" class="nav-link" href="">Products</a>
+                    </li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a href="#" class="profile-icon">
+                            <i class="bi bi-person-fill"></i>
+                        </a>
+                    </li>
+
+                    <a href="">
+                        <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                            <button class="login-btn">
+                                Logout
+                            </button>
+                        </li>
+                    </a>
+
+                    <!-- Cart Icon -->
+                    <li class="nav-item ms-lg-3">
+                        <a href="" class="cart-icon" style="background: #ff4d6d;">
+                            <i class="bi bi-cart3" style="color: white;"></i>
+                            <span class="cart-badge" id="navbar-cart-badge">
+                                {{ cart_count|default:0 }}
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Cart Section Start -->
+    <section class="cart-section">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="cart-title-wrapper text-center">
+                <p class="cart-subtitle">Your Selection</p>
+                <h1 class="cart-main-title">Shopping Cart</h1>
+            </div>
+
+            
+            <!-- Cart Content -->
+            <div class="row g-4" id="cart-content-row">
+                <!-- Cart Items Column -->
+                <div class="col-lg-8">
+                    <div class="cart-container table-responsive">
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart_obj %}
+                                <tr class="cart-item-row" data-item-id="" data-price="">
+                                    <!-- Image & Name -->
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            
+                                            <img src="{{ item.cake.cake_image.url }}" alt="" class="cart-item-img">
+                    
+                                            <div>
+                                                <h5 class="cart-item-name">{{ item.cake.cake_name }}</h5>
+                                                <span class="cart-item-category">{{ item.cake.cake_description }}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!-- Price -->
+                                    <td>
+                                        <span class="cart-item-price">₹{{ item.cake.cake_price }}</span>
+                                    </td>
+                                    <!-- Quantity Controller -->
+                                    <td>
+                                        <div class="quantity-controller">
+                                            <a href="" class="btn-quantity btn-decrement" style="text-decoration: none;">-</a>
+                                            <span class="quantity-val">{{ item.quantity }}</span>
+                                            <a href="" class="btn-quantity btn-increment" style="text-decoration: none;">+</a>
+                                        </div>
+                                    </td>
+                                    <!-- Subtotal -->
+                                    <td>
+                                        <span class="cart-item-subtotal">₹{{ item.total_amount }}</span>
+                                    </td>
+                                    <!-- Remove Button -->
+                                    <td>
+                                        <a href="" class="btn-remove-item">
+                                            <i class="bi bi-trash3-fill"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Cart Summary Column -->
+                <div class="col-lg-4">
+                    <div class="summary-card">
+                        <h4 class="summary-title">Order Summary</h4>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal">₹{{ grand_total }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Estimated Delivery</span>
+                            <span class="text-success">FREE</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Total Amount</span>
+                            <span class="total-amount" id="summary-total">₹{{ grand_total }}</span>
+                        </div>
+                        <a href="#" class="btn-checkout">
+                            <i class="bi bi-credit-card-fill"></i> Proceed to Checkout
+                        </a>
+                        <a href="" class="btn-continue-shopping">
+                            <i class="bi bi-arrow-left"></i> Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Cart Section End -->
+
+    <!-- Footer Section Start -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row gy-5">
+                <!-- Brand Info -->
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <h2 class="footer-logo">
+                            Sweet<span>Cake</span>
+                        </h2>
+                        <p class="footer-text">
+                            Bringing sweetness to every celebration with
+                            handcrafted cakes, delightful desserts, and
+                            unforgettable flavors made with love.
+                        </p>
+                        <!-- Social Icons -->
+                        <div class="social-icons">
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">About</a></li>
+                            <li><a href="#">Gallery</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><a href="#">Birthday Cakes</a></li>
+                            <li><a href="#">Wedding Cakes</a></li>
+                            <li><a href="#">Custom Designs</a></li>
+                            <li><a href="#">Fast Delivery</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-lg-3">
+                    <div class="footer-contact">
+                        <h4>Contact Us</h4>
+                        <p><i class="bi bi-geo-alt-fill"></i> SweetCake Bakery, Kerala, India</p>
+                        <p><i class="bi bi-telephone-fill"></i> +91 99999 99999</p>
+                        <p><i class="bi bi-envelope-fill"></i> info@sweetcake.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>© 2026 SweetCake. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

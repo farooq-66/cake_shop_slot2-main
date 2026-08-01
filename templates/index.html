@@ -1,0 +1,422 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Cake Shop</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand logo-text" href="#">
+                Sweet<span>Cake</span>
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <i class="bi bi-list fs-1"></i>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+
+                <ul class="navbar-nav align-items-lg-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about-page' %}">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gallery</a>
+                    </li>
+
+                    {% if request.session.user_id %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view-products' %}">Products</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <a href="{% url 'login_page' %}"><button class="login-btn" >
+                            Login
+                        </button></a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Hero Section Start -->
+    <section class="hero-section">
+
+        <div class="container">
+
+            <div class="row align-items-center min-vh-100">
+
+                <!-- Left Content -->
+                <div class="col-lg-6">
+
+                    <div class="hero-content">
+
+                        <p class="hero-tag">
+                            MADE WITH LOVE
+                        </p>
+
+                        <h1 class="hero-title">
+                            Delicious Cakes <br>
+                            Made for Every <span>Celebration</span>
+                        </h1>
+
+                        <p class="hero-description">
+                            At SweetCake, we bake more than just cakes —
+                            we create unforgettable moments filled with
+                            sweetness, happiness, and love. Every cake is
+                            handcrafted with premium ingredients and a touch
+                            of creativity to make your special day even more magical.
+                        </p>
+
+                        <button class="hero-btn">
+                            Know More
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Features Section Start -->
+    <section class="features-section">
+
+        <div class="container">
+
+            <!-- Section Heading -->
+            <div class="section-title text-center">
+
+                <p class="sub-heading">
+                    WHY CHOOSE US
+                </p>
+
+                <h2>
+                    Sweet Moments Begin <br>
+                    With Our Delicious Cakes
+                </h2>
+
+            </div>
+
+            <!-- Cards Row -->
+            <div class="row g-4 mt-4">
+
+                <!-- Card 1 -->
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-cake2-fill"></i>
+                        </div>
+
+                        <h4>Freshly Baked</h4>
+
+                        <p>
+                            Every cake is baked fresh daily using premium
+                            ingredients to deliver unmatched taste and softness.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-heart-fill"></i>
+                        </div>
+
+                        <h4>Made With Love</h4>
+
+                        <p>
+                            Our expert bakers craft every dessert with passion,
+                            creativity, and attention to every tiny detail.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-gift-fill"></i>
+                        </div>
+
+                        <h4>Custom Designs</h4>
+
+                        <p>
+                            Personalized cakes designed perfectly for birthdays,
+                            weddings, parties, and all your special occasions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Card 4 -->
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-truck"></i>
+                        </div>
+
+                        <h4>Fast Delivery</h4>
+
+                        <p>
+                            We ensure safe and quick doorstep delivery so your
+                            celebrations never miss the sweetness.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-stars"></i>
+                        </div>
+
+                        <h4>Premium Quality</h4>
+
+                        <p>
+                            We maintain high-quality standards in flavor,
+                            decoration, hygiene, and customer satisfaction.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Card 6 -->
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="bi bi-emoji-smile-fill"></i>
+                        </div>
+
+                        <h4>Happy Customers</h4>
+
+                        <p>
+                            Thousands of customers trust us for creating sweet
+                            memories that make every celebration unforgettable.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Features Section End -->
+
+    <!-- Footer Section Start -->
+    <footer class="footer-section">
+
+        <div class="container">
+
+            <div class="row gy-5">
+
+                <!-- Brand Info -->
+                <div class="col-lg-4">
+
+                    <div class="footer-brand">
+
+                        <h2 class="footer-logo">
+                            Sweet<span>Cake</span>
+                        </h2>
+
+                        <p class="footer-text">
+                            Bringing sweetness to every celebration with
+                            handcrafted cakes, delightful desserts, and
+                            unforgettable flavors made with love.
+                        </p>
+
+                        <!-- Social Icons -->
+                        <div class="social-icons">
+
+                            <a href="#">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="bi bi-twitter-x"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="bi bi-youtube"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6">
+
+                    <div class="footer-links">
+
+                        <h4>Quick Links</h4>
+
+                        <ul>
+
+                            <li>
+                                <a href="#">Home</a>
+                            </li>
+
+                            <li>
+                                <a href="#">About</a>
+                            </li>
+
+                            <li>
+                                <a href="#">Gallery</a>
+                            </li>
+
+                            <li>
+                                <a href="#">Contact</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <!-- Services -->
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="footer-links">
+
+                        <h4>Our Services</h4>
+
+                        <ul>
+
+                            <li>
+                                <a href="#">Birthday Cakes</a>
+                            </li>
+
+                            <li>
+                                <a href="#">Wedding Cakes</a>
+                            </li>
+
+                            <li>
+                                <a href="#">Custom Designs</a>
+                            </li>
+
+                            <li>
+                                <a href="#">Fast Delivery</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <!-- Contact -->
+                <div class="col-lg-3">
+
+                    <div class="footer-contact">
+
+                        <h4>Contact Us</h4>
+
+                        <p>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            SweetCake Bakery, Kerala, India
+                        </p>
+
+                        <p>
+                            <i class="bi bi-telephone-fill"></i>
+                            +91 99999 99999
+                        </p>
+
+                        <p>
+                            <i class="bi bi-envelope-fill"></i>
+                            info@sweetcake.com
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 SweetCake. All Rights Reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+    <!-- Footer Section End -->
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
